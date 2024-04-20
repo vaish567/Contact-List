@@ -56,7 +56,7 @@ The frontend provides a user interface to view, create, update, and delete conta
 - **ContactList:** Displays a list of contacts and allows editing or deleting them.
 - **ContactForm:** Form for creating or editing a contact.
 
-To run the frontend, execute the `App.js` file.
+To run the frontend, execute the `App.jsx` file.
 
 ### Instructions
 
