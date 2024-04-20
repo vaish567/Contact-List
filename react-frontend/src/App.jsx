@@ -1,10 +1,8 @@
-
 import { useState, useEffect } from "react";
 
 import "./App.css";
 import ContactList from "./components/ContactPage/ContactList";
 import ContactForm from "./components/ContactPage/ContactForm";
-
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -12,14 +10,12 @@ function App() {
   const [currentContact, setCurrentContact] = useState({})
 
   useEffect(() => {
-    fetchContacts()
+    const fetchData = async () => {
+      const contactsData = await fetchContacts();
+      setContacts(contactsData);
+    };
+    fetchData();
   }, []);
-
-  const fetchContacts = async () => {
-    const response = await fetch("http://127.0.0.1:5000/contacts");
-    const data = await response.json();
-    setContacts(data.contacts);
-  };
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -37,8 +33,8 @@ function App() {
   }
 
   const onUpdate = () => {
-    closeModal()
-    fetchContacts()
+    closeModal();
+    fetchContacts().then(data => setContacts(data));
   }
 
   return (

@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-
+import { Table, Button } from 'antd';
 
 const ContactList = ({ contacts, updateContact, updateCallback }) => {
     const onDelete = async (id) => {
@@ -18,32 +17,40 @@ const ContactList = ({ contacts, updateContact, updateCallback }) => {
         }
     }
 
-    return <div>
-        <h2>Contacts</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {contacts.map((contact) => (
-                    <tr key={contact.id}>
-                        <td>{contact.firstName}</td>
-                        <td>{contact.lastName}</td>
-                        <td>{contact.email}</td>
-                        <td>
-                            <button onClick={() => updateContact(contact)}>Update</button>
-                            <button onClick={() => onDelete(contact.id)}>Delete</button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    </div>
+    const columns = [
+        {
+            title: 'First Name',
+            dataIndex: 'firstName',
+            key: 'firstName',
+        },
+        {
+            title: 'Last Name',
+            dataIndex: 'lastName',
+            key: 'lastName',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+        },
+        {
+            title: 'Actions',
+            key: 'actions',
+            render: (text, record) => (
+                <>
+                    <Button onClick={() => updateContact(record)}>Update</Button>
+                    <Button danger onClick={() => onDelete(record.id)}>Delete</Button>
+                </>
+            ),
+        },
+    ];
+
+    return (
+        <div>
+            <h2>Contacts</h2>
+            <Table dataSource={contacts} columns={columns} />
+        </div>
+    );
 }
 
-export default ContactList
+export default ContactList;
