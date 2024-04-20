@@ -49,7 +49,7 @@ To run the backend, execute the `main.py` file.
 
 ### Frontend (React)
 
-The frontend provides a user interface to view, create, update, and delete contacts.
+The frontend provides a user interface to view, create, update, and delete contacts. Ant Design is used for styling components.
 
 #### Components
 
@@ -57,6 +57,7 @@ The frontend provides a user interface to view, create, update, and delete conta
 - **ContactForm:** Form for creating or editing a contact.
 
 To run the frontend, execute the `App.jsx` file.
+
 
 ### Instructions
 
