@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import ContactList from "./components/ContactPage/ContactList";
 import ContactForm from "./components/ContactPage/ContactForm";
+import { fetchContacts } from "./config/api";
+
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -48,6 +50,7 @@ function App() {
         </div>
       </div>
       }
+     
     </>
   );
 }

@@ -1,42 +1,30 @@
 import { useState } from "react";
 import { Form, Input, Button } from 'antd';
+import { createContact, updateContact } from "../../config/api";
 
 const ContactForm = ({ existingContact = {}, updateCallback }) => {
-    const [firstName, setFirstName] = useState(existingContact.firstName || "");
-    const [lastName, setLastName] = useState(existingContact.lastName || "");
-    const [email, setEmail] = useState(existingContact.email || "");
+    const [form] = Form.useForm(); // Use Form hooks
+    const [updating, setUpdating] = useState(Object.entries(existingContact).length !== 0);
 
-    const updating = Object.entries(existingContact).length !== 0;
-
-    const onSubmit = async (values) => {
-        const data = {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            email: values.email
-        };
-
-        const url = "http://127.0.0.1:5000/" + (updating ? `update_contact/${existingContact.id}` : "create_contact");
-        const options = {
-            method: updating ? "PATCH" : "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        };
-
-        const response = await fetch(url, options);
-        if (response.status !== 201 && response.status !== 200) {
-            const data = await response.json();
-            alert(data.message);
-        } else {
-            updateCallback();
+    const onFinish = async (values) => {
+        try {
+            if (updating) {
+                await updateContact(existingContact.id, values);
+            } else {
+                await createContact(values);
+            }
+            updateCallback(); // Update contacts after submission
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Error occurred while submitting the form");
         }
     };
 
     return (
         <Form
+            form={form}
             initialValues={existingContact}
-            onFinish={onSubmit}
+            onFinish={onFinish}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
         >
