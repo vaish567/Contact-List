@@ -1,8 +1,9 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Ant Design
 
-Currently, two official plugins are available:
+Ant Design is a popular React UI library for building elegant and efficient user interfaces. It provides a wide range of components and utilities for creating modern web applications.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To use Ant Design components in your project, simply install the `antd` package:
+
+```bash
+npm install antd
